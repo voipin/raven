@@ -2,9 +2,9 @@
 
 A very simple service to embed input strings
 
-There is no current structure because of how small the service is, but
-if we want to expand this, we can easily create a few folders
-
+This follows a simple app architecture
+* routers contain all routes organized by need (in this case embeddings)
+* schemas contain pydantic classes that define request and response structures
 ```
 ├── embeddings
 │   ├── __init__.py
@@ -12,15 +12,12 @@ if we want to expand this, we can easily create a few folders
 │   └── routers
 │   │   ├── __init__.py
 │   │   ├── embeddings.py
-│   │   └── users.py
 │   └── schemas
 │       ├── __init__.py
 │       └── embeddings.py
 ```
 
-
-Routers will hold the actual organized routes, schemas hold the Pydantic classes
-see [here](https://fastapi.tiangolo.com/tutorial/bigger-applications/) for more information
+See [here](https://fastapi.tiangolo.com/tutorial/bigger-applications/) for more information
 
 
 ## Development
@@ -42,7 +39,7 @@ Go to the [hosted docs](http://localhost:8088/docs) to try it
 or POST
 ```
 curl -X 'POST' \
-  'http://localhost:8088/' \
+  'http://localhost:8088/embeddings' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{

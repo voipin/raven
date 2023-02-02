@@ -1,25 +1,14 @@
 import logging
 import time
-from typing import Callable, List
+from typing import Callable
 
-import tensorflow_hub as hub
 import uvicorn
-from fastapi import Body, FastAPI, Request
-from pydantic import BaseModel
+from fastapi import FastAPI, Request
 
-
-class EmbeddingsRequest(BaseModel):
-    strings: List[str]
-
-
-class EmbeddingsResponse(EmbeddingsRequest):
-    embeddings: List[List[float]]
-
+from routers.embeddings import router
 
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
-# USEv5 is about 100x faster than 4
-EMBED = hub.load("https://tfhub.dev/google/universal-sentence-encoder-large/5")
 
 app = FastAPI()
 
@@ -34,15 +23,7 @@ async def add_process_time_header(request: Request, call_next: Callable):
     return response
 
 
-@app.post("/", response_model=EmbeddingsResponse)
-async def embed(
-    payload: EmbeddingsRequest = Body(
-        ..., example={"strings": ["test 1", "test 2", "foo", "bar"]}
-    )
-) -> EmbeddingsResponse:
-    """Embeds a list of strings, returning a list of floats for every string input"""
-    embeddings = [i.numpy().tolist() for i in EMBED(payload.strings)]
-    return EmbeddingsResponse(embeddings=embeddings, **payload.dict())
+app.include_router(router)
 
 
 if __name__ == "__main__":
