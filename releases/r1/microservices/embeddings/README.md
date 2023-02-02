@@ -5,6 +5,7 @@ A very simple service to embed input strings
 There is no current structure because of how small the service is, but
 if we want to expand this, we can easily create a few folders
 
+```
 ├── embeddings
 │   ├── __init__.py
 │   ├── main.py
@@ -15,6 +16,7 @@ if we want to expand this, we can easily create a few folders
 │   └── schemas
 │       ├── __init__.py
 │       └── embeddings.py
+```
 
 
 Routers will hold the actual organized routes, schemas hold the Pydantic classes
