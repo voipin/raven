@@ -39,7 +39,7 @@ Go to the [hosted docs](http://localhost:8088/docs) to try it
 or POST
 ```
 curl -X 'POST' \
-  'http://localhost:8088/' \
+  'http://localhost:8088/embeddings' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
