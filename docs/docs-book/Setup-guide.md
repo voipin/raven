@@ -8,4 +8,6 @@ These docs are using on tool [mdDocs](https://rust-lang.github.io/mdBook/guide/c
 
 - Go to docs-book `cd docs/docs-book`
 
-- Compile static site and host on http://localhost:3000 `mdbook serve --open`
+- Compile static site `mdbook build`
+
+- Host on http://localhost:3000 `mdbook serve --open`
